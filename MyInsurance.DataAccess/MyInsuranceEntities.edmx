@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MyInsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ServiceUrl" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="TCNumber" />
+          </Key>
+          <Property Name="TCNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PlateNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="LicenseSerialCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="LicenseSerialNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OfferDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfferDetailId" Type="int" Nullable="false" />
+          <Property Name="CustomerTcNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK_OfferDetail_Offers">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="1" />
+          <End Role="OfferDetail" Type="Self.OfferDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OfferDetail">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="TCNumber" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="CustomerTcNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyInsuranceModelStoreContainer">
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferDetail" EntityType="Self.OfferDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OfferDetail_Offers" Association="Self.FK_OfferDetail_Offers">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="OfferDetail" EntitySet="OfferDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Companies" Association="Self.FK_Offers_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Customers" Association="Self.FK_Offers_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyInsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyInsuranceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="MyInsuranceModel.Company" />
+          <EntitySet Name="Customers" EntityType="MyInsuranceModel.Customer" />
+          <EntitySet Name="OfferDetails" EntityType="MyInsuranceModel.OfferDetail" />
+          <EntitySet Name="Offers" EntityType="MyInsuranceModel.Offer" />
+          <AssociationSet Name="FK_Offers_Companies" Association="MyInsuranceModel.FK_Offers_Companies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Offer" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Customers" Association="MyInsuranceModel.FK_Offers_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Offer" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfferDetail_Offers" Association="MyInsuranceModel.FK_OfferDetail_Offers">
+            <End Role="Offer" EntitySet="Offers" />
+            <End Role="OfferDetail" EntitySet="OfferDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Offers" Relationship="MyInsuranceModel.FK_Offers_Companies" FromRole="Company" ToRole="Offer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="TCNumber" />
+          </Key>
+          <Property Name="TCNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="PlateNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseSerialCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Offers" Relationship="MyInsuranceModel.FK_Offers_Customers" FromRole="Customer" ToRole="Offer" />
+        </EntityType>
+        <EntityType Name="OfferDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Offer" Relationship="MyInsuranceModel.FK_OfferDetail_Offers" FromRole="OfferDetail" ToRole="Offer" />
+        </EntityType>
+        <EntityType Name="Offer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfferDetailId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerTcNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="MyInsuranceModel.FK_Offers_Companies" FromRole="Offer" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="MyInsuranceModel.FK_Offers_Customers" FromRole="Offer" ToRole="Customer" />
+          <NavigationProperty Name="OfferDetail" Relationship="MyInsuranceModel.FK_OfferDetail_Offers" FromRole="Offer" ToRole="OfferDetail" />
+        </EntityType>
+        <Association Name="FK_Offers_Companies">
+          <End Type="MyInsuranceModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MyInsuranceModel.Offer" Role="Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Customers">
+          <End Type="MyInsuranceModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MyInsuranceModel.Offer" Role="Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="TCNumber" />
+            </Principal>
+            <Dependent Role="Offer">
+              <PropertyRef Name="CustomerTcNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfferDetail_Offers">
+          <End Type="MyInsuranceModel.Offer" Role="Offer" Multiplicity="1" />
+          <End Type="MyInsuranceModel.OfferDetail" Role="OfferDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Offer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OfferDetail">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyInsuranceModelStoreContainer" CdmEntityContainer="MyInsuranceEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="MyInsuranceModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="ServiceUrl" ColumnName="ServiceUrl" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MyInsuranceModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="LicenseSerialNumber" ColumnName="LicenseSerialNumber" />
+                <ScalarProperty Name="LicenseSerialCode" ColumnName="LicenseSerialCode" />
+                <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
+                <ScalarProperty Name="TCNumber" ColumnName="TCNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfferDetails">
+            <EntityTypeMapping TypeName="MyInsuranceModel.OfferDetail">
+              <MappingFragment StoreEntitySet="OfferDetail">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="MyInsuranceModel.Offer">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CustomerTcNumber" ColumnName="CustomerTcNumber" />
+                <ScalarProperty Name="OfferDetailId" ColumnName="OfferDetailId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
