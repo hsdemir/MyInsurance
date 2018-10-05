@@ -1,0 +1,35 @@
+﻿@model MyInsurance.Model.Customer
+@{
+    ViewBag.Title = "Sigorta Teklifi Al";
+}
+
+<h2>Sigorta Teklifi Al</h2>
+
+@using (Html.BeginForm("GetOffer", "Offer"))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td><b>TC No:</b></td>
+            <td>@Html.TextBoxFor(model => model.TcNumber)</td>
+        </tr>
+        <tr>
+            <td><b>Plaka No:</b></td>
+            <td>@Html.TextBoxFor(model => model.CustomerCar.PlateNumber)</td>
+        </tr>
+        <tr>
+            <td><b>Ruhsat Seri Kodu:</b></td>
+            <td>@Html.TextBoxFor(model => model.CustomerCar.LicenseSerialCode)</td>
+        </tr>
+        <tr>
+            <td><b>Ruhsat Seri No:</b></td>
+            <td>@Html.TextBoxFor(model => model.CustomerCar.LicenseSerialNumber)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Teklif Al" />
+            </td>
+        </tr>
+    </table>
+}
+

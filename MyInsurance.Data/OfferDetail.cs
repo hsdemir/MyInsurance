@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyInsurance.DataAccess
+namespace MyInsurance.Data
 {
     using System;
     using System.Collections.Generic;

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyInsurance.DataAccess
+namespace MyInsurance.Data
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,6 @@ namespace MyInsurance.DataAccess
     public partial class Offer
     {
         public int Id { get; set; }
-        public int OfferDetailId { get; set; }
         public string CustomerTcNumber { get; set; }
         public int CompanyId { get; set; }
         public string Description { get; set; }

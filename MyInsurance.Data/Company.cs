@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyInsurance.DataAccess
+namespace MyInsurance.Data
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +24,8 @@ namespace MyInsurance.DataAccess
         public string Name { get; set; }
         public string Logo { get; set; }
         public string Address { get; set; }
-        public string ServiceUrl { get; set; }
+        public string ServiceDomain { get; set; }
+        public string ServicePath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offer> Offers { get; set; }

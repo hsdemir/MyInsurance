@@ -7,25 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyInsurance.DataAccess
+namespace MyInsurance.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class CustomerCar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public CustomerCar()
         {
-            this.Offers = new HashSet<Offer>();
+            this.Customers = new HashSet<Customer>();
         }
     
-        public string TCNumber { get; set; }
         public string PlateNumber { get; set; }
         public string LicenseSerialCode { get; set; }
         public string LicenseSerialNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Offer> Offers { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

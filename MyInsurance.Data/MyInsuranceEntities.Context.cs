@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyInsurance.DataAccess
+namespace MyInsurance.Data
 {
     using System;
     using System.Data.Entity;
@@ -26,8 +26,10 @@ namespace MyInsurance.DataAccess
         }
     
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CustomerCar> CustomerCars { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<OfferDetail> OfferDetails { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

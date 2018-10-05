@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7BDCE4D4-F37A-4A4C-80F0-E28C66FF044E}</ProjectGuid>
+    <ProjectGuid>{0328BFF7-D6DE-4083-BA17-D3D4AB59E8B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MyInsurance.DataAccess</RootNamespace>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -38,11 +42,18 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,62 +62,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Company.cs">
-      <DependentUpon>MyInsuranceEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>MyInsuranceEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyInsuranceEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyInsuranceEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyInsuranceEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyInsuranceEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyInsuranceEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyInsuranceEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Offer.cs">
-      <DependentUpon>MyInsuranceEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OfferDetail.cs">
-      <DependentUpon>MyInsuranceEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="DataAccess\CompanyDataAccess.cs" />
+    <Compile Include="DataAccess\CustomerDataAccess.cs" />
+    <Compile Include="DataAccess\OfferDataAccess.cs" />
+    <Compile Include="Interface\ICompanyDataAccess.cs" />
+    <Compile Include="Interface\ICustomerDataAccess.cs" />
+    <Compile Include="Interface\IOfferDataAccess.cs" />
+    <Compile Include="Interface\IOfferMapper.cs" />
+    <Compile Include="Mappers\CompanyMapper.cs" />
+    <Compile Include="Mappers\CustomerMapper.cs" />
+    <Compile Include="Mappers\OfferMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="MyInsuranceEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyInsuranceEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="MyInsuranceEntities.edmx.diagram">
-      <DependentUpon>MyInsuranceEntities.edmx</DependentUpon>
-    </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="MyInsuranceEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyInsuranceEntities.edmx</DependentUpon>
-      <LastGenOutput>MyInsuranceEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MyInsuranceEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyInsuranceEntities.edmx</DependentUpon>
-      <LastGenOutput>MyInsuranceEntities.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\MyInsurance.Data\MyInsurance.Data.csproj">
+      <Project>{3b4336f8-a735-4ad4-b466-c54f82b8ac61}</Project>
+      <Name>MyInsurance.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyInsurance.Model\MyInsurance.Model.csproj">
+      <Project>{563ec04b-174a-4d84-b491-6031e42de834}</Project>
+      <Name>MyInsurance.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
