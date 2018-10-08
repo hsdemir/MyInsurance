@@ -16,6 +16,12 @@ namespace MyInsurance.Business.Business
         {
             _customerDataAccess = new CustomerDataAccess();
         }
+
+        public Customer Create(Customer customer)
+        {
+           return _customerDataAccess.Create(customer);
+        }
+
         public Customer GetCustomer(string TcNumber, string PlateNumber)
         {
             return _customerDataAccess.GetCustomer(TcNumber, PlateNumber);

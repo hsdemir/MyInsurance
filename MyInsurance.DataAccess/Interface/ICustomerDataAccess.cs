@@ -10,5 +10,6 @@ namespace MyInsurance.DataAccess.Interface
     public interface ICustomerDataAccess
     {
         Customer GetCustomer(string TcNumber, string PlateNumber);
+        Customer Create(Customer customer);
     }
 }

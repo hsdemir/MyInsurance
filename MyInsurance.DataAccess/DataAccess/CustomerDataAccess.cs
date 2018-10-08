@@ -17,6 +17,19 @@ namespace MyInsurance.DataAccess.DataAccess
             _customerMapper = new CustomerMapper();
         }
 
+        public Customer Create(Customer customer)
+        {
+            using (var db = new Data.MyInsuranceEntities())
+            {
+                var customerData = _customerMapper.ToData(customer);
+                db.Customers.Add(customerData);
+                db.SaveChanges();
+
+                customerData = db.Customers.FirstOrDefault(c => c.TCNumber == customer.TCNumber && c.PlateNumber == customer.CustomerCar.PlateNumber);
+                return _customerMapper.ToModel(customerData);
+            }
+        }
+
         public Customer GetCustomer(string TcNumber, string PlateNumber)
         {
             using (var db = new Data.MyInsuranceEntities())

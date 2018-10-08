@@ -10,5 +10,6 @@ namespace MyInsurance.Business.Interface
     public interface ICustomerBusiness
     {
         Customer GetCustomer(string TcNumber, string PlateNumber);
+        Customer Create(Customer customer);
     }
 }

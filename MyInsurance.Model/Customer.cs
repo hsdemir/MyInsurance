@@ -10,8 +10,10 @@ namespace MyInsurance.Model
     public class Customer
     {
         [Required]
-        public string TcNumber { get; set; }
+        public string TCNumber { get; set; }
+        public string PlateNumber { get; set; }
         [Required]
         public CustomerCar CustomerCar { get; set; }
+        public List<Offer> Offers { get; set; }
     }
 }

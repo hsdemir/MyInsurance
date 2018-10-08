@@ -10,9 +10,11 @@ namespace MyInsurance.Ui.Controllers
 {
     public class OfferController : Controller
     {
+        CustomerBusiness _customerBusiness;
         OfferBusiness _offerBusiness;
         public OfferController()
         {
+            _customerBusiness = new CustomerBusiness();
             _offerBusiness = new OfferBusiness();
         }
         public ActionResult GetOffer()
@@ -26,6 +28,9 @@ namespace MyInsurance.Ui.Controllers
             {
                 return RedirectToAction("GetOffer");
             }
+
+            //Önce müşteri bilgilerini kaydet
+            customer = _customerBusiness.Create(customer);
 
             //Teklif topla
             var offerList = _offerBusiness.GetAllCompanyOffers(customer);

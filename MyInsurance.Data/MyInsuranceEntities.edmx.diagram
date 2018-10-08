@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d585d9ab8db8470d9e949dc4472df023" Name="Diagram1">
+      <Diagram DiagramId="d585d9ab8db8470d9e949dc4472df023" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="MyInsuranceModel.Company" Width="1.5" PointX="3" PointY="5" />
         <EntityTypeShape EntityType="MyInsuranceModel.CustomerCar" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="MyInsuranceModel.Customer" Width="1.5" PointX="3" PointY="1.25" />
@@ -12,8 +12,8 @@
         <EntityTypeShape EntityType="MyInsuranceModel.Offer" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="MyInsuranceModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" />
         <AssociationConnector Association="MyInsuranceModel.FK_Offers_Companies" />
-        <AssociationConnector Association="MyInsuranceModel.FK_Customers_CustomerCars" />
-        <AssociationConnector Association="MyInsuranceModel.FK_Offers_Customers" />
+        <AssociationConnector Association="MyInsuranceModel.FK_Customers_CustomerCars1" />
+        <AssociationConnector Association="MyInsuranceModel.FK_Offers_Customers1" />
         <AssociationConnector Association="MyInsuranceModel.FK_OfferDetail_Offers" />
       </Diagram>
     </edmx:Diagrams>

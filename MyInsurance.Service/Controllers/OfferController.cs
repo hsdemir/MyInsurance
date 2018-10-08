@@ -30,13 +30,12 @@ namespace MyInsurance.Service.Controllers
             int x = new Random().Next(200, 700);
             offerDetail.Price = 1000 + x;
 
-            //Teklifi kaydet
+            //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Allianz Kasko Teklifi";
             offer.Customer = customer;
             offer.Company = company;
             offer.OfferDetail = offerDetail;
-            _offerBusiness.Create(offer);
 
             return offer;
         }
@@ -51,12 +50,11 @@ namespace MyInsurance.Service.Controllers
             int x = new Random().Next(200, 700);
             offerDetail.Price = 1000 + x;
 
-            //Teklifi kaydet
+            //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Axa Kasko Teklifi";
             offer.Customer = customer;
             offer.Company = company;
-            offer.OfferDetail = offerDetail;
 
             _offerBusiness.Create(offer);
 
@@ -73,14 +71,12 @@ namespace MyInsurance.Service.Controllers
             int x = new Random().Next(200, 700);
             offerDetail.Price = 1000 + x;
 
-            //Teklifi kaydet
+            //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Acıbadem Sigorta Kasko Teklifi";
             offer.Customer = customer;
             offer.Company = company;
             offer.OfferDetail = offerDetail;
-
-            _offerBusiness.Create(offer);
 
             return offer;
         }

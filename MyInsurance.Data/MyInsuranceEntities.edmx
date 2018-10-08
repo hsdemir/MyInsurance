@@ -57,7 +57,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Customers_CustomerCars">
+        <Association Name="FK_Customers_CustomerCars1">
           <End Role="CustomerCars" Type="Self.CustomerCars" Multiplicity="1" />
           <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -93,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Offers_Customers">
+        <Association Name="FK_Offers_Customers1">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +112,7 @@
           <EntitySet Name="OfferDetail" EntityType="Self.OfferDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Customers_CustomerCars" Association="Self.FK_Customers_CustomerCars">
+          <AssociationSet Name="FK_Customers_CustomerCars1" Association="Self.FK_Customers_CustomerCars1">
             <End Role="CustomerCars" EntitySet="CustomerCars" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
@@ -124,7 +124,7 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Offers" EntitySet="Offers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Offers_Customers" Association="Self.FK_Offers_Customers">
+          <AssociationSet Name="FK_Offers_Customers1" Association="Self.FK_Offers_Customers1">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Offers" EntitySet="Offers" />
           </AssociationSet>
@@ -144,11 +144,11 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="Offer" EntitySet="Offers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customers_CustomerCars" Association="MyInsuranceModel.FK_Customers_CustomerCars">
+          <AssociationSet Name="FK_Customers_CustomerCars1" Association="MyInsuranceModel.FK_Customers_CustomerCars1">
             <End Role="CustomerCar" EntitySet="CustomerCars" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Offers_Customers" Association="MyInsuranceModel.FK_Offers_Customers">
+          <AssociationSet Name="FK_Offers_Customers1" Association="MyInsuranceModel.FK_Offers_Customers1">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Offer" EntitySet="Offers" />
           </AssociationSet>
@@ -176,7 +176,7 @@
           <Property Name="PlateNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="LicenseSerialCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LicenseSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="MyInsuranceModel.FK_Customers_CustomerCars" FromRole="CustomerCar" ToRole="Customer" />
+          <NavigationProperty Name="Customers" Relationship="MyInsuranceModel.FK_Customers_CustomerCars1" FromRole="CustomerCar" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -184,8 +184,8 @@
           </Key>
           <Property Name="TCNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="PlateNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CustomerCar" Relationship="MyInsuranceModel.FK_Customers_CustomerCars" FromRole="Customer" ToRole="CustomerCar" />
-          <NavigationProperty Name="Offers" Relationship="MyInsuranceModel.FK_Offers_Customers" FromRole="Customer" ToRole="Offer" />
+          <NavigationProperty Name="CustomerCar" Relationship="MyInsuranceModel.FK_Customers_CustomerCars1" FromRole="Customer" ToRole="CustomerCar" />
+          <NavigationProperty Name="Offers" Relationship="MyInsuranceModel.FK_Offers_Customers1" FromRole="Customer" ToRole="Offer" />
         </EntityType>
         <EntityType Name="OfferDetail">
           <Key>
@@ -204,7 +204,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Company" Relationship="MyInsuranceModel.FK_Offers_Companies" FromRole="Offer" ToRole="Company" />
-          <NavigationProperty Name="Customer" Relationship="MyInsuranceModel.FK_Offers_Customers" FromRole="Offer" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="MyInsuranceModel.FK_Offers_Customers1" FromRole="Offer" ToRole="Customer" />
           <NavigationProperty Name="OfferDetail" Relationship="MyInsuranceModel.FK_OfferDetail_Offers" FromRole="Offer" ToRole="OfferDetail" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -229,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customers_CustomerCars">
+        <Association Name="FK_Customers_CustomerCars1">
           <End Type="MyInsuranceModel.CustomerCar" Role="CustomerCar" Multiplicity="1" />
           <End Type="MyInsuranceModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -241,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Offers_Customers">
+        <Association Name="FK_Offers_Customers1">
           <End Type="MyInsuranceModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="MyInsuranceModel.Offer" Role="Offer" Multiplicity="*" />
           <ReferentialConstraint>

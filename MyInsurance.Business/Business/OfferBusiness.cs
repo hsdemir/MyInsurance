@@ -46,6 +46,7 @@ namespace MyInsurance.Business.Business
                     var serviceResponse = _serviceHelper.ServiceCall<Offer>(company.ServiceDomain, company.ServicePath, Method.POST, headers: headers, parameters: parameters);
                     if (serviceResponse.StatusCode == HttpStatusCode.OK && serviceResponse.Data != null)
                     {
+                        Create(serviceResponse.Data);
                         offerList.Add(serviceResponse.Data);
                     }
                 }
