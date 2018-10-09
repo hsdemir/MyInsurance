@@ -5,13 +5,24 @@
 
 <h2>Sigorta Teklifleri</h2>
 
+
+
 @if (Model != null && Model.Count > 0)
 {
-    <table>
+    <table class="table table-striped" style="margin-top:50px;">
+        <thead>
+            <tr>
+                <th>Kurum Logo</th>
+                <th>Kurum Adı</th>
+                <th>Teklif Açıklama</th>
+                <th>Teklif tutarı</th>
+                <th>Plaka</th>
+            </tr>
+        </thead>
         @foreach (var offer in Model)
         {
             <tr>
-                <td><img src="/assets/img/@offer.Company.Logo" width="100" /></td>
+                <td><img src="/Content/img/@offer.Company.Logo" width="100" /></td>
                 <td>@offer.Company.Name</td>
                 <td>@offer.Description</td>
                 <td>@offer.OfferDetail.Price TL</td>
@@ -19,6 +30,25 @@
             </tr>
         }
     </table>
+}
+else
+{
+    using (Html.BeginForm("GetMyOffers", "Offer"))
+    {
+        @Html.AntiForgeryToken()
+        <table style="margin-top:50px;">
+            <tr>
+                <td><b>Tc No:</b></td>
+                <td>@Html.TextBox("TcNumber")</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Teklif Al" />
+                    </td>
+                </tr>
+            </table>
+    }
+
 }
 
 

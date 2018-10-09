@@ -16,7 +16,8 @@ namespace MyInsurance.Service.Controllers
         {
             _customerBusiness = new CustomerBusiness();
         }
-        Customer GetCustomer(string TcNumber, string PlateNumber)
+        
+        public Customer GetCustomer(string TcNumber, string PlateNumber)
         {
             return _customerBusiness.GetCustomer(TcNumber, PlateNumber);
         }

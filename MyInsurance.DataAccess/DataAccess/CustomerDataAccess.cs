@@ -39,7 +39,7 @@ namespace MyInsurance.DataAccess.DataAccess
         {
             using (var db = new Data.MyInsuranceEntities())
             {
-                var customerData = db.Customers.FirstOrDefault(c => c.TCNumber == TcNumber && c.PlateNumber == PlateNumber);
+                var customerData = db.Customers.Include(o=> o.CustomerCar).FirstOrDefault(c => c.TCNumber == TcNumber && c.PlateNumber == PlateNumber);
                 return _customerMapper.ToModel(customerData);
             }
         }

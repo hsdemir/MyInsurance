@@ -5,25 +5,52 @@
 
 <h2>Sigorta Teklifi Al</h2>
 
-@using (Html.BeginForm("GetOffer", "Offer"))
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #eee;
+    }
+    td{
+        border:1px solid #eee;
+        padding:6px;
+    }
+    td.left{
+        width:200px;
+    }
+</style>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <table>
+    <table style="margin-top:50px;">
         <tr>
-            <td><b>TC No:</b></td>
-            <td>@Html.TextBoxFor(model => model.TCNumber)</td>
+            <td><b>@Html.LabelFor(model => model.TCNumber)</b></td>
+            <td class="left">
+                @Html.TextBoxFor(model => model.TCNumber, new { @class = "txtTcNumber" })
+                @Html.ValidationMessageFor(model => model.TCNumber, "", new { @class = "text-danger" })
+            </td>
         </tr>
         <tr>
-            <td><b>Plaka No:</b></td>
-            <td>@Html.TextBoxFor(model => model.CustomerCar.PlateNumber)</td>
+            <td><b>@Html.LabelFor(model => model.CustomerCar.PlateNumber)</b></td>
+            <td>
+                @Html.TextBoxFor(model => model.CustomerCar.PlateNumber, new { @class = "txtPlateNumber" })
+                @Html.ValidationMessageFor(model => model.CustomerCar.PlateNumber, "", new { @class = "text-danger" })
+            </td>
         </tr>
         <tr>
-            <td><b>Ruhsat Seri Kodu:</b></td>
-            <td>@Html.TextBoxFor(model => model.CustomerCar.LicenseSerialCode)</td>
+            <td><b>@Html.LabelFor(model => model.CustomerCar.LicenseSerialCode)</b></td>
+            <td>
+                @Html.TextBoxFor(model => model.CustomerCar.LicenseSerialCode, new { @class = "txtLicenseSerialCode" })
+                @Html.ValidationMessageFor(model => model.CustomerCar.LicenseSerialCode, "", new { @class = "text-danger" })
+            </td>
         </tr>
         <tr>
-            <td><b>Ruhsat Seri No:</b></td>
-            <td>@Html.TextBoxFor(model => model.CustomerCar.LicenseSerialNumber)</td>
+            <td><b>@Html.LabelFor(model => model.CustomerCar.LicenseSerialNumber)</b></td>
+            <td>
+                @Html.TextBoxFor(model => model.CustomerCar.LicenseSerialNumber, new { @class = "txtLicenseSerialNumber" })
+                @Html.ValidationMessageFor(model => model.CustomerCar.LicenseSerialNumber, "", new { @class = "text-danger" })
+            </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -31,5 +58,32 @@
             </td>
         </tr>
     </table>
+}
+
+@section script {
+
+    <script>
+        $(function () {
+
+            $('.txtPlateNumber').blur(function () {
+                console.log('blur');
+                var tcNumber = $('.txtTcNumber').val();
+                var plateNumber = $(this).val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:1096/api/customer/getcustomer?TcNumber=' + tcNumber + '&PlateNumber=' + plateNumber,
+                    dataType: 'json',
+                    success: function (response) {
+                        $('.txtLicenseSerialCode').val(response.CustomerCar.LicenseSerialCode);
+                        $('.txtLicenseSerialNumber').val(response.CustomerCar.LicenseSerialNumber);
+                        console.log(response);
+                    }
+                });
+            });
+
+        });
+    </script>
+
 }
 

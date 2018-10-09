@@ -32,7 +32,7 @@ namespace MyInsurance.Ui.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToRoute("TeklifAl");
+                return View(customer);
             }
 
             //Önce müşteri bilgilerini kaydet
@@ -49,6 +49,20 @@ namespace MyInsurance.Ui.Controllers
         {
             var offerList = TempData["OfferList"] as List<Offer>;
             return View(offerList);
+        }
+
+        [HttpPost]
+        public ActionResult GetMyOffers(string TcNumber)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToRoute("TeklifAl");
+            }
+
+            var offerList = _offerBusiness.GetCustomerOffers(TcNumber);
+            TempData["OfferList"] = offerList;
+
+            return RedirectToRoute("Teklifler");
         }
     }
 }

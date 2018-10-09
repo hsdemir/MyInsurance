@@ -25,7 +25,12 @@ namespace MyInsurance.DataAccess.DataAccess
                 db.Offers.Add(offerData);
                 db.SaveChanges();
 
-                offerData = db.Offers.Include(o => o.Customer).Include(o => o.Customer.CustomerCar).Include(o => o.Company).OrderByDescending(o => o.Id).First();
+                offerData = db.Offers
+                            .Include(o => o.Customer)
+                            .Include(o => o.Customer.CustomerCar)
+                            .Include(o => o.Company)
+                            .OrderByDescending(o => o.Id).First();
+
                 offerData.Customer.Offers = null;
                 offerData.Company.Offers = null;
 
@@ -37,9 +42,18 @@ namespace MyInsurance.DataAccess.DataAccess
         {
             using (var db = new Data.MyInsuranceEntities())
             {
-                var offerData = db.Offers.Where(o => o.CustomerTcNumber == TcNumber).ToList();
-                var offerModel = _offerMapper.ToModelList(offerData);
-                return offerModel;
+                var offerData = db.Offers
+                                .Include(o=> o.OfferDetail)
+                                .Include(o => o.Customer)
+                                .Include(o => o.Customer.CustomerCar)
+                                .Include(o => o.Company)
+                                .Where(o => o.CustomerTcNumber == TcNumber)
+                                .ToList();
+
+                offerData.ForEach(o => o.Customer.Offers = null);
+                offerData.ForEach(o => o.Company.Offers = null);
+
+                return _offerMapper.ToModelList(offerData);
             }
         }
 
