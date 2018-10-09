@@ -23,7 +23,7 @@ namespace MyInsurance.Service.Controllers
         public Offer GetAllianzOffer(Customer customer)
         {
             //Şirket bilgisi getir
-            var company = _companyBusiness.GetCompany(2);
+            var company = _companyBusiness.GetCompany(1);
 
             //Teklif tutarı hesapla
             var offerDetail = new OfferDetail();
@@ -33,8 +33,8 @@ namespace MyInsurance.Service.Controllers
             //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Allianz Kasko Teklifi";
-            offer.CustomerTcNumber = customer.TCNumber;
             offer.CompanyId = company.Id;
+            offer.CustomerTcNumber = customer.TCNumber;
             offer.OfferDetail = offerDetail;
 
             return offer;
@@ -56,8 +56,7 @@ namespace MyInsurance.Service.Controllers
             offer.Description = "Axa Kasko Teklifi";
             offer.CustomerTcNumber = customer.TCNumber;
             offer.CompanyId = company.Id;
-
-            _offerBusiness.Create(offer);
+            offer.OfferDetail = offerDetail;
 
             return offer;
         }

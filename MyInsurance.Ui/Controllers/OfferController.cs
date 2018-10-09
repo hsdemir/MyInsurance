@@ -40,12 +40,14 @@ namespace MyInsurance.Ui.Controllers
 
             //Teklif topla
             var offerList = _offerBusiness.GetAllCompanyOffers(customer);
+            TempData["OfferList"] = offerList;
 
-            return RedirectToRoute("Teklifler", new { offerList = offerList });
+            return RedirectToRoute("Teklifler");
         }
 
-        public ActionResult OfferList(List<Offer> offerList)
+        public ActionResult OfferList()
         {
+            var offerList = TempData["OfferList"] as List<Offer>;
             return View(offerList);
         }
     }

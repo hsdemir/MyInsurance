@@ -25,9 +25,9 @@ namespace MyInsurance.Business.Business
             _companyBusiness = new CompanyBusiness();
             _serviceHelper = new ServiceHelper();
         }
-        public void Create(Offer offer)
+        public Offer Create(Offer offer)
         {
-            _offerDataAccess.Create(offer);
+            return _offerDataAccess.Create(offer);
         }
 
         public List<Offer> GetAllCompanyOffers(Customer customer)
@@ -46,8 +46,8 @@ namespace MyInsurance.Business.Business
                     var serviceResponse = _serviceHelper.ServiceCall<Offer>(company.ServiceDomain, company.ServicePath, Method.POST, headers: headers, parameters: parameters);
                     if (serviceResponse.StatusCode == HttpStatusCode.OK && serviceResponse.Data != null)
                     {
-                        Create(serviceResponse.Data);
-                        offerList.Add(serviceResponse.Data);
+                        var offerModel = Create(serviceResponse.Data);
+                        offerList.Add(offerModel);
                     }
                 }
             }

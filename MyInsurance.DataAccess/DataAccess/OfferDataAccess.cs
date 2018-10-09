@@ -17,13 +17,19 @@ namespace MyInsurance.DataAccess.DataAccess
         {
             _offerMapper = new OfferMapper();
         }
-        public void Create(Offer offer)
+        public Offer Create(Offer offer)
         {
             var offerData = _offerMapper.ToData(offer);
             using (var db = new Data.MyInsuranceEntities())
             {
                 db.Offers.Add(offerData);
                 db.SaveChanges();
+
+                offerData = db.Offers.Include(o => o.Customer).Include(o => o.Customer.CustomerCar).Include(o => o.Company).OrderByDescending(o => o.Id).First();
+                offerData.Customer.Offers = null;
+                offerData.Company.Offers = null;
+
+                return _offerMapper.ToModel(offerData);
             }
         }
 

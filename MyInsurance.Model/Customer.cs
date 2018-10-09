@@ -9,11 +9,7 @@ namespace MyInsurance.Model
 {
     public class Customer
     {
-        public Customer()
-        {
-            Offers = new List<Offer>();
-        }
-        [Required]
+        [Required, MaxLength(11)]
         public string TCNumber { get; set; }
         public string PlateNumber { get; set; }
         [Required]

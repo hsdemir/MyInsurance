@@ -11,6 +11,6 @@ namespace MyInsurance.Business.Interface
     {
         List<Offer> GetAllCompanyOffers(Customer customer);
         List<Offer> GetCustomerOffers(string TcNumber);
-        void Create(Offer offer);
+        Offer Create(Offer offer);
     }
 }

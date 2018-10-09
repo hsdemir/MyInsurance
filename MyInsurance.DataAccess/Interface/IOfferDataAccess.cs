@@ -1,4 +1,4 @@
-﻿using MyInsurance.Data;
+﻿using MyInsurance.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +9,8 @@ namespace MyInsurance.DataAccess.Interface
 {
     public interface IOfferDataAccess
     {
-        Model.Offer GetOffer(int Id);
-        List<Model.Offer> GetCustomerOffers(string TcNumber);
-        void Create(Model.Offer offer);
+        Offer GetOffer(int Id);
+        List<Offer> GetCustomerOffers(string TcNumber);
+        Offer Create(Offer offer);
     }
 }

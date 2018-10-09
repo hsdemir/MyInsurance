@@ -9,7 +9,7 @@ namespace MyInsurance.Model
 {
    public class CustomerCar
     {
-        [Required]
+        [Required, MaxLength(12)]
         public string PlateNumber { get; set; }
         [Required]
         public string LicenseSerialCode { get; set; }
