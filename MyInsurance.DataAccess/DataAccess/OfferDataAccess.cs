@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MyInsurance.Model;
 using MyInsurance.DataAccess.Mappers;
+using System.Data.Entity;
 
 namespace MyInsurance.DataAccess.DataAccess
 {
@@ -21,19 +22,6 @@ namespace MyInsurance.DataAccess.DataAccess
             var offerData = _offerMapper.ToData(offer);
             using (var db = new Data.MyInsuranceEntities())
             {
-                //Müşteri daha önce eklenmişse tekrar eklemeye çalışma
-                var customer = db.Customers.FirstOrDefault(c => c.TCNumber == offerData.Customer.TCNumber);
-                if (customer != null)
-                {
-                    //Müşteriye ait aynı araç daha önce eklendi ise tekrar eklemeye çalışma
-                    offerData.CustomerTcNumber = customer.TCNumber;
-                    var customerCar = db.CustomerCars.FirstOrDefault(c => c.PlateNumber == customer.PlateNumber);
-                    if (customerCar != null)
-                    {
-                        offerData.Customer.PlateNumber = customerCar.PlateNumber;
-                    }
-                }
-
                 db.Offers.Add(offerData);
                 db.SaveChanges();
             }

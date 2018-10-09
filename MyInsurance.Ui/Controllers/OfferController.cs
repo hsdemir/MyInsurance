@@ -17,6 +17,12 @@ namespace MyInsurance.Ui.Controllers
             _customerBusiness = new CustomerBusiness();
             _offerBusiness = new OfferBusiness();
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult GetOffer()
         {
             return View();
@@ -26,7 +32,7 @@ namespace MyInsurance.Ui.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("GetOffer");
+                return RedirectToRoute("TeklifAl");
             }
 
             //Önce müşteri bilgilerini kaydet
@@ -35,7 +41,7 @@ namespace MyInsurance.Ui.Controllers
             //Teklif topla
             var offerList = _offerBusiness.GetAllCompanyOffers(customer);
 
-            return RedirectToAction("OfferList", new { offerList = offerList });
+            return RedirectToRoute("Teklifler", new { offerList = offerList });
         }
 
         public ActionResult OfferList(List<Offer> offerList)

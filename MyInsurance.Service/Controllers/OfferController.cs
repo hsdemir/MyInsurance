@@ -33,17 +33,18 @@ namespace MyInsurance.Service.Controllers
             //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Allianz Kasko Teklifi";
-            offer.Customer = customer;
-            offer.Company = company;
+            offer.CustomerTcNumber = customer.TCNumber;
+            offer.CompanyId = company.Id;
             offer.OfferDetail = offerDetail;
 
             return offer;
         }
 
+        [HttpPost]
         public Offer GetAxaOffer(Customer customer)
         {
             //Şirket bilgisi getir
-            var company = _companyBusiness.GetCompany(4);
+            var company = _companyBusiness.GetCompany(2);
 
             //Teklif tutarı hesapla
             var offerDetail = new OfferDetail();
@@ -53,18 +54,19 @@ namespace MyInsurance.Service.Controllers
             //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Axa Kasko Teklifi";
-            offer.Customer = customer;
-            offer.Company = company;
+            offer.CustomerTcNumber = customer.TCNumber;
+            offer.CompanyId = company.Id;
 
             _offerBusiness.Create(offer);
 
             return offer;
         }
 
+        [HttpPost]
         public Offer GetAcibademOffer(Customer customer)
         {
             //Şirket bilgisi getir
-            var company = _companyBusiness.GetCompany(5);
+            var company = _companyBusiness.GetCompany(3);
 
             //Teklif tutarı hesapla
             var offerDetail = new OfferDetail();
@@ -74,8 +76,8 @@ namespace MyInsurance.Service.Controllers
             //Teklifi doldur
             var offer = new Offer();
             offer.Description = "Acıbadem Sigorta Kasko Teklifi";
-            offer.Customer = customer;
-            offer.Company = company;
+            offer.CustomerTcNumber = customer.TCNumber;
+            offer.CompanyId = company.Id;
             offer.OfferDetail = offerDetail;
 
             return offer;
